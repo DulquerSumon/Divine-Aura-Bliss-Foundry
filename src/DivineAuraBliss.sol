@@ -68,6 +68,7 @@ contract DivineAuraBliss is ReentrancyGuard {
         uint256 blissGained;
     }
     mapping(uint256 => Spirit) private auras;
+    mapping(address => string) private auraProvider;
     Spirit[] public auraList;
 
     constructor() {
@@ -90,7 +91,25 @@ contract DivineAuraBliss is ReentrancyGuard {
         token = IERC20(_token);
     }
 
-    function getSpirit() public view returns (Spirit[] memory) {
+    function createOrUpdateProfile(string memory _url) public {
+        auraProvider[msg.sender] = _url;
+    }
+
+    function getAuraList() public view returns (Spirit[] memory) {
         return auraList;
+    }
+
+    function getAuras() public view returns (Spirit[] memory) {
+        Spirit[] memory list = new Spirit[](currentCountedAura);
+        for (uint256 i = 0; i < currentCountedAura; i++) {
+            list[i] = auras[i + 1];
+        }
+        return list;
+    }
+
+    function getAddressToProfile(
+        address _provider
+    ) public view returns (string memory) {
+        return auraProvider[_provider];
     }
 }

@@ -2,23 +2,23 @@
 pragma solidity ^0.8.13;
 
 import {Test, console2} from "forge-std/Test.sol";
-import {Counter} from "../src/Counter.sol";
+import {DivineAuraBliss} from "../src/DivineAuraBliss.sol";
 
 contract CounterTest is Test {
-    Counter public counter;
+    DivineAuraBliss public divineAuraBliss;
 
     function setUp() public {
-        counter = new Counter();
-        counter.setNumber(0);
+        divineAuraBliss = new DivineAuraBliss();
+        divineAuraBliss.shareAura("sd");
     }
 
-    function testIncrement() public {
-        counter.increment();
-        assertEq(counter.number(), 1);
-    }
+    // function testIncrement() public {
+    //     divineAuraBliss.increment();
+    //     assertEq(divineAuraBliss.number(), 1);
+    // }
 
-    function testSetNumber(uint256 x) public {
-        counter.setNumber(x);
-        assertEq(counter.number(), x);
-    }
+    // function testSetNumber(uint256 x) public {
+    //     divineAuraBliss.setNumber(x);
+    //     assertEq(divineAuraBliss.number(), x);
+    // }
 }
